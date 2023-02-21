@@ -22,6 +22,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void SwitchGunNext();
+
 public:	
 
 	UFUNCTION(BlueprintPure)
@@ -47,7 +49,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10.f;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	float MaxHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere)
@@ -59,13 +61,14 @@ private:
 	UPROPERTY()
 	AGun* Gun;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
+	UPROPERTY(EditDefaultsOnly)
 	TArray<TSubclassOf<AGun>> GunClasses;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TArray<AGun*> Guns;
 	int ActiveGunIndex;
 
-	void SwitchGun(int Delta);
-	void SwitchGunToIndex(int Index);
+	
 
 	// properties for gun array version
  
