@@ -1,0 +1,22 @@
+JOG SPEED
+0.15 foot on the floor
+(X=-7.972706,Y=19.456373,Z=12.778509)
+0.31 foot leaves the floor
+(X=-4.488877,Y=-28.765634,Z=17.790626)
+
+jog_speed in cm/s = end.y - start.y / end.time - start.time
+end.y - start.y =  -48.222007
+
+-48.222007 / 0.16 = -301.38754375 cm/s
+
+WALK SPEED
+
+0.34 foot on the floor
+(X=-5.621059,Y=21.346419,Z=11.586799)
+0.69 foot leaves the floor
+(X=-5.326378,Y=-24.573203,Z=15.465898)
+
+walk_speed in cm/s = end.y - start.y / end.time - start.time
+end.y - start.y =  -45.919622
+
+-45.919622 / 0.35 = -131.19892 cm/s
