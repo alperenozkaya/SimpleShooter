@@ -16,10 +16,14 @@ public:
 	AGun();
 
 	void PullTrigger();
+	// used in ShooterCharacter
+	void Reload();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	// used in ShooterCharacter
+	
 
 public:	
 	// Called every frame
@@ -54,5 +58,14 @@ private:
 
 	AController* GetOwnerController() const;
 
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	int TotalAmmo = 50;
+	
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	int MagazineAmmo = 30;
+
+	int CurrentMagazineAmmo;
+
+	
 
 };

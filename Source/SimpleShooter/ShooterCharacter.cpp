@@ -6,6 +6,9 @@
 #include "Components/CapsuleComponent.h"
 #include "SimpleShooterGameModeBase.h"
 #include "InputCoreTypes.h"
+#include "Kismet/GameplayStatics.h"
+#include "TimerManager.h"
+#include "Components/InputComponent.h"
 
 
 // Sets default values
@@ -23,6 +26,7 @@ void AShooterCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	Health = MaxHealth;
+	UE_LOG(LogTemp, Display, TEXT("BeginPlay is run"));
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	// attach guns in gun array
 	Guns.SetNum(GunClasses.Num());
@@ -34,10 +38,13 @@ void AShooterCharacter::BeginPlay()
 
 		Guns[i] = Gun;
 	}
-	
-	
 
-
+	// initialize the first gun
+	
+	GunInputBindings();
+	
+	// TODO: hide all other guns
+	
 	/* Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
@@ -48,6 +55,7 @@ bool AShooterCharacter::IsDead() const
 {
 	return Health <= 0;
 }
+
 
 float AShooterCharacter::GetHealthPercent() const
 {
@@ -67,8 +75,6 @@ void AShooterCharacter::Tick(float DeltaTime)
 	}
 	Guns[ActiveGunIndex]->SetActorHiddenInGame(false);
 	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
-
-
 
 }
 
@@ -91,6 +97,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Shoot"), IE_Pressed, this, &AShooterCharacter::Shoot);
 
 	PlayerInputComponent->BindAction(TEXT("SwitchGunNext"), IE_Pressed, this, &AShooterCharacter::SwitchGunNext);
+	
 
 }
 
@@ -111,8 +118,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		
-		
+			
 	}
 
 	return DamageToApply;
@@ -139,6 +145,27 @@ void AShooterCharacter::LookRightRate(float AxisValue)
 	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
 }
 
+void AShooterCharacter::ZoomInOut()
+{
+	
+}
+
+void AShooterCharacter::GunInputBindings()
+{
+	PlayerInputComponent2 = GetWorld()->GetFirstPlayerController()->FindComponentByClass<UInputComponent>();
+    if (PlayerInputComponent2)
+    {
+		// first clear binding to avoid multiple bindings
+		PlayerInputComponent2->ClearActionBindings();
+        if (Guns.IsValidIndex(ActiveGunIndex))
+		{
+			AGun* ActiveGun = Guns[ActiveGunIndex];
+			PlayerInputComponent2->BindAction(TEXT("Reload"), IE_Pressed, ActiveGun, &AGun::Reload);
+		}
+    }
+}
+
+
 void AShooterCharacter::SwitchGunNext()
 {
 	if (Guns[ActiveGunIndex])
@@ -149,18 +176,30 @@ void AShooterCharacter::SwitchGunNext()
 		}
 		else
 		{
-			ActiveGunIndex = 0;	
-			
+			ActiveGunIndex = 0;				
 		}
-
 	}
-
+	GunInputBindings();
 }
 
 
 void AShooterCharacter::Shoot()
 {
-	Guns[ActiveGunIndex]->PullTrigger();
+	UE_LOG(LogTemp, Display, TEXT("Shoot is called"));
+	// return true for animation
+	if (bCanShoot)
+	{
+		bCanShoot = false;
+		GetWorld()->GetTimerManager().SetTimer(ShootCooldownTimerHandle, this, &AShooterCharacter::ResetCanShoot, ShootCooldown, false);
+		Guns[ActiveGunIndex]->PullTrigger();
+	}
+	else return;
+		
+}
+
+void AShooterCharacter::ResetCanShoot()
+{
+	bCanShoot = true;
 }
 
 

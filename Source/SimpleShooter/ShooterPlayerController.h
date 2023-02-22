@@ -30,6 +30,8 @@ private:
 
 	FTimerHandle RestartTimer;
 
+	float StartDelay = 4.f;
+
 	UPROPERTY()
 	UUserWidget* HUDWidget;
 

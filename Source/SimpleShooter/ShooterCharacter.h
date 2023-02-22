@@ -28,6 +28,21 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
+	// to add shooting animation
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Animation")
+	bool bIsShooting;
+
+	void ResetCanShoot();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Combat")
+	bool bCanShoot = true;
+
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Combat")
+	float ShootCooldown = 0.5f;
+
+	FTimerHandle ShootCooldownTimerHandle;
+	
 
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const;
@@ -45,6 +60,10 @@ private:
 	void MoveRight(float AxisValue);
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
+	// function to zoom in and out
+	void ZoomInOut();
+
+
 	
 
 	UPROPERTY(EditAnywhere)
@@ -68,13 +87,9 @@ private:
 	TArray<AGun*> Guns;
 	int ActiveGunIndex;
 
-	
+	// Input component to handle gun functions
+	UInputComponent* PlayerInputComponent2;
 
-	// properties for gun array version
- 
-	
-
-
-	
+	void GunInputBindings();
 
 };

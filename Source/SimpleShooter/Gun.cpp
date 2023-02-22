@@ -24,33 +24,41 @@ AGun::AGun()
 
 void AGun::PullTrigger()
 {
-	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
-	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("MuzzleFlashSocket"));
-	
-	FHitResult Hit;
-	FVector ShotDirection;
-	bool bSuccess = GunTrace(Hit, ShotDirection);
-	if (bSuccess)
+	if (CurrentMagazineAmmo <= 0) return;
+	else
 	{
 		
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, Hit.Location);
-		
-		AActor* HitActor = Hit.GetActor();
-		if (HitActor != nullptr)
+		UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+		UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("MuzzleFlashSocket"));
+		FHitResult Hit;
+		FVector ShotDirection;
+		bool bSuccess = GunTrace(Hit, ShotDirection);
+		if (bSuccess)
 		{
-			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
-			AController* OwnerController = GetOwnerController();
-			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, Hit.Location);
+			
+			AActor* HitActor = Hit.GetActor();
+			if (HitActor != nullptr)
+			{
+				FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
+				AController* OwnerController = GetOwnerController();
+				HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+			}
 		}
-		
+		TotalAmmo--;
+		CurrentMagazineAmmo--;
 	}
+	UE_LOG(LogTemp, Display, TEXT("Total Remaining ammos are %i"), TotalAmmo);
+	UE_LOG(LogTemp, Display, TEXT("CurrentMagazine ammos are %i"), CurrentMagazineAmmo);
+				
 }
 
 // Called when the game starts or when spawned
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
+	CurrentMagazineAmmo = MagazineAmmo;
 	
 }
 
@@ -84,6 +92,21 @@ AController* AGun::GetOwnerController() const
 	if (OwnerPawn == nullptr)  return nullptr;
 	return OwnerPawn->GetController();
 	
+}
+
+void AGun::Reload()
+{
+	if (TotalAmmo <= 0) return;
+	else
+	{
+			int AmmosRemainingInMagazine = MagazineAmmo - CurrentMagazineAmmo;
+			int RemainingReloadableAmmos = TotalAmmo - CurrentMagazineAmmo;
+			int ReloadableAmmos = FMath::Min(AmmosRemainingInMagazine, RemainingReloadableAmmos);
+
+			CurrentMagazineAmmo += ReloadableAmmos;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Total ammos are %i"), TotalAmmo);
+	UE_LOG(LogTemp, Warning, TEXT("Current Magazine Ammos are %i"), CurrentMagazineAmmo);
 }
 
 
