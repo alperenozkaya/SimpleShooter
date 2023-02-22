@@ -66,6 +66,21 @@ private:
 
 	int CurrentMagazineAmmo;
 
+	UFUNCTION(BlueprintPure)
+	FText GetAmmoInfo() const;
+
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	USoundBase* ReloadSound;
+
+	void ResetCanReload();
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	bool bCanReload = true;
+
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	float ReloadTime = 3.f;
+
+	FTimerHandle ReloadTimerHandle;
 	
 
 };

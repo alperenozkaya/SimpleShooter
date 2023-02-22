@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\inc\\simpleshooter\\gun.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\simpleshooter\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\development\\simpleshooter\\definitions.simpleshooter.h",
+            "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\gun.h",
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\inc\\simpleshooter\\gun.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

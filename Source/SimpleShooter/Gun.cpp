@@ -94,19 +94,39 @@ AController* AGun::GetOwnerController() const
 	
 }
 
+FText AGun::GetAmmoInfo() const
+{
+	FText InfoText = FText::FromString(FString::Printf(TEXT("%i / %i"), CurrentMagazineAmmo, TotalAmmo));
+	return InfoText;
+}
+
+
 void AGun::Reload()
 {
 	if (TotalAmmo <= 0) return;
 	else
 	{
+		if (bCanReload)
+		{
+			bCanReload = false;
+			GetWorldTimerManager().SetTimer(ReloadTimerHandle, this, &AGun::ResetCanReload, ReloadTime, false);
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), ReloadSound, GetActorLocation());
+		
 			int AmmosRemainingInMagazine = MagazineAmmo - CurrentMagazineAmmo;
 			int RemainingReloadableAmmos = TotalAmmo - CurrentMagazineAmmo;
 			int ReloadableAmmos = FMath::Min(AmmosRemainingInMagazine, RemainingReloadableAmmos);
 
 			CurrentMagazineAmmo += ReloadableAmmos;
+		}
+		
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Total ammos are %i"), TotalAmmo);
 	UE_LOG(LogTemp, Warning, TEXT("Current Magazine Ammos are %i"), CurrentMagazineAmmo);
+}
+
+void AGun::ResetCanReload()
+{
+	bCanReload = true;
 }
 
 

@@ -55,6 +55,9 @@ public:
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 	void Shoot();
+
+	UFUNCTION(BlueprintCallable)
+	AGun* CurrentGun() const;
 private:
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
@@ -64,7 +67,6 @@ private:
 	void ZoomInOut();
 
 
-	
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10.f;
@@ -87,9 +89,14 @@ private:
 	TArray<AGun*> Guns;
 	int ActiveGunIndex;
 
+
+
 	// Input component to handle gun functions
 	UInputComponent* PlayerInputComponent2;
 
 	void GunInputBindings();
+
+
+	
 
 };

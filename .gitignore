@@ -27,3 +27,8 @@ Intermediate/Build/Win64/UnrealEditor/Inc/SimpleShooter/Timestamp
 *.modules
 *.target
 *.ush
+*.exe
+*.res
+*.ubulk
+*.uexp
+*.ushaderbytecode

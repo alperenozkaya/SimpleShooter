@@ -189,7 +189,9 @@ void AShooterCharacter::Shoot()
 	// return true for animation
 	if (bCanShoot)
 	{
+		
 		bCanShoot = false;
+		bIsShooting = true;
 		GetWorld()->GetTimerManager().SetTimer(ShootCooldownTimerHandle, this, &AShooterCharacter::ResetCanShoot, ShootCooldown, false);
 		Guns[ActiveGunIndex]->PullTrigger();
 	}
@@ -197,9 +199,17 @@ void AShooterCharacter::Shoot()
 		
 }
 
-void AShooterCharacter::ResetCanShoot()
+AGun* AShooterCharacter::CurrentGun() const
 {
+	return Guns[ActiveGunIndex];
+}
+
+void AShooterCharacter::ResetCanShoot()
+{	
+	bIsShooting = false; //after 0.5 sec delay
 	bCanShoot = true;
+	// TODO: change shoot animation implementation
+	
 }
 
 

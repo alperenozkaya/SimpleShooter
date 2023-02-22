@@ -1,0 +1,42 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\shootercharacter.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\simpleshooter\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\development\\simpleshooter\\definitions.simpleshooter.h",
+            "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\shootercharacter.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\charactermovementreplication.generated.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\rootmotionsource.generated.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\character.generated.h",
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\inc\\simpleshooter\\shootercharacter.generated.h",
+            "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\gun.h",
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\inc\\simpleshooter\\gun.generated.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\components\\capsulecomponent.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\shapecomponent.generated.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\capsulecomponent.generated.h",
+            "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\simpleshootergamemodebase.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\serverstatreplicator.generated.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\gamemodebase.generated.h",
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealgame\\inc\\simpleshooter\\simpleshootergamemodebase.generated.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystatics.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetsystemlibrary.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\kismetsystemlibrary.generated.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\sound\\dialoguetypes.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\dialoguetypes.generated.h",
+            "e:\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystaticstypes.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\gameplaystaticstypes.generated.h",
+            "e:\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealgame\\inc\\engine\\gameplaystatics.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
