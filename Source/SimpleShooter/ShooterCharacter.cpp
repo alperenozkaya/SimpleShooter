@@ -9,6 +9,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 #include "Components/InputComponent.h"
+#include "Animation/AnimSequence.h"
+#include "Components/SkeletalMeshComponent.h"
 
 
 // Sets default values
@@ -35,12 +37,23 @@ void AShooterCharacter::BeginPlay()
 		Gun = GetWorld()->SpawnActor<AGun>(GunClasses[i]);
 		Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
 		Gun->SetOwner(this);
+		Gun->Children.Empty();
 
 		Guns[i] = Gun;
 	}
 
-	// initialize the first gun
+	GunInputBindings();
+
 	
+	// initialize the first gun
+	for (int i = 0; i < Guns.Num(); i++)
+	{
+		Guns[i]->SetActorHiddenInGame(true);
+		Guns[i]->SetActorEnableCollision(false);
+	}
+	Guns[ActiveGunIndex]->SetActorHiddenInGame(false);
+	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
+
 	GunInputBindings();
 	
 	// TODO: hide all other guns
@@ -66,19 +79,8 @@ float AShooterCharacter::GetHealthPercent() const
 void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// hide all guns except the current one
-	for (int i = 0; i < Guns.Num(); i++)
-	{
-		Guns[i]->SetActorHiddenInGame(true);
-		Guns[i]->SetActorEnableCollision(false);
-	}
-	Guns[ActiveGunIndex]->SetActorHiddenInGame(false);
-	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
-
+	
 }
-
-
 
 // Called to bind functionality to input
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -110,6 +112,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 	if (IsDead())
 	{
+		Guns[ActiveGunIndex]->Drop();
 		ASimpleShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();
 		if (GameMode != nullptr)
 		{
@@ -163,6 +166,7 @@ void AShooterCharacter::GunInputBindings()
 			PlayerInputComponent2->BindAction(TEXT("Reload"), IE_Pressed, ActiveGun, &AGun::Reload);
 		}
     }
+	else return;
 }
 
 
@@ -179,7 +183,19 @@ void AShooterCharacter::SwitchGunNext()
 			ActiveGunIndex = 0;				
 		}
 	}
+	
+	else return ;
 	GunInputBindings();
+	UE_LOG(LogTemp, Display, TEXT("SwitchGunNext is called, index is: %d"), ActiveGunIndex);
+
+	// hide all guns except the current one
+	for (int i = 0; i < Guns.Num(); i++)
+	{
+		Guns[i]->SetActorHiddenInGame(true);
+		Guns[i]->SetActorEnableCollision(false);
+	}
+	Guns[ActiveGunIndex]->SetActorHiddenInGame(false);
+	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
 }
 
 
@@ -187,16 +203,31 @@ void AShooterCharacter::Shoot()
 {
 	UE_LOG(LogTemp, Display, TEXT("Shoot is called"));
 	// return true for animation
-	if (bCanShoot)
+	if (bCanShoot && Guns[ActiveGunIndex]->GetCurrentMagazineAmmo() > 0)
 	{
 		
 		bCanShoot = false;
 		bIsShooting = true;
-		GetWorld()->GetTimerManager().SetTimer(ShootCooldownTimerHandle, this, &AShooterCharacter::ResetCanShoot, ShootCooldown, false);
 		Guns[ActiveGunIndex]->PullTrigger();
-	}
-	else return;
+		GetWorld()->GetTimerManager().SetTimer(ShootAnimationTimerHandle, this, &AShooterCharacter::ResetIsShooting, ShootAnimationFlagDelay, false);
 		
+		
+		// play shoot animation additively
+		// TODO: implement it as blueprintfunction	
+
+		GetWorld()->GetTimerManager().SetTimer(ShootCooldownTimerHandle, this, &AShooterCharacter::ResetCanShoot, ShootCooldown, false);	
+	}
+	else
+	{
+		
+		return;
+	} 
+		
+}
+
+void AShooterCharacter::ResetIsShooting()
+{
+	bIsShooting = false;
 }
 
 AGun* AShooterCharacter::CurrentGun() const
@@ -204,12 +235,33 @@ AGun* AShooterCharacter::CurrentGun() const
 	return Guns[ActiveGunIndex];
 }
 
+void AShooterCharacter::PickUpGun(AGun* GunToPickUp)
+{
+	if (GunToPickUp == nullptr) return;
+	Guns.Add(GunToPickUp);
+	ActiveGunIndex = Guns.Num() - 1;
+	GunToPickUp->GetMesh()->SetSimulatePhysics(false);
+	GunToPickUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("WeaponSocket"));
+	GunToPickUp->SetOwner(this);
+	
+	GunInputBindings();
+
+	// hide all guns except the current one
+	for (int i = 0; i < Guns.Num(); i++)
+	{
+		Guns[i]->SetActorHiddenInGame(true);
+		Guns[i]->SetActorEnableCollision(false);
+	}
+	Guns[ActiveGunIndex]->SetActorHiddenInGame(false);
+	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
+
+
+}
+
 void AShooterCharacter::ResetCanShoot()
 {	
-	bIsShooting = false; //after 0.5 sec delay
 	bCanShoot = true;
 	// TODO: change shoot animation implementation
-	
 }
 
 

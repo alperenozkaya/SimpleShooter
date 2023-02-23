@@ -69,6 +69,11 @@ void AGun::Tick(float DeltaTime)
 
 }
 
+USkeletalMeshComponent* AGun::GetMesh() const
+{
+	return Mesh;
+}
+
 bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 {
 	AController* OwnerController = GetOwnerController();
@@ -122,6 +127,25 @@ void AGun::Reload()
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Total ammos are %i"), TotalAmmo);
 	UE_LOG(LogTemp, Warning, TEXT("Current Magazine Ammos are %i"), CurrentMagazineAmmo);
+}
+
+int AGun::GetCurrentMagazineAmmo() const
+{
+	return CurrentMagazineAmmo;
+}
+
+void AGun::Drop()
+{
+	// Detach the gun from shooter character and drop it to the ground
+	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+	SetActorLocation(GetActorLocation());
+	// Set the gun's collision to be able to be picked up by other characters
+	//Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	// Set the gun's gravity to be able to be picked up by other characters
+	Mesh->SetSimulatePhysics(true);
+
+
 }
 
 void AGun::ResetCanReload()

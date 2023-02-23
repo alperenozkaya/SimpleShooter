@@ -19,6 +19,10 @@ public:
 	// used in ShooterCharacter
 	void Reload();
 
+	int GetCurrentMagazineAmmo() const;
+
+	void Drop();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -29,12 +33,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// get mesh function to disable simulate physics in shooter character cpp
+	USkeletalMeshComponent* GetMesh() const;
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
+
+
 
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* MuzzleFlash;

@@ -17,6 +17,7 @@ class AGun;
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_SPARSE_DATA
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
 	DECLARE_FUNCTION(execGetHealthPercent); \
 	DECLARE_FUNCTION(execIsDead);
@@ -24,6 +25,7 @@ class AGun;
 
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
 	DECLARE_FUNCTION(execGetHealthPercent); \
 	DECLARE_FUNCTION(execIsDead);

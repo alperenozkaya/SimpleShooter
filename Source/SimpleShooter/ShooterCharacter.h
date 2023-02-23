@@ -27,19 +27,31 @@ protected:
 public:	
 
 	UFUNCTION(BlueprintPure)
+	// check if the player is dead
 	bool IsDead() const;
+	
+	
 	// to add shooting animation
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Animation")
 	bool bIsShooting;
 
-	void ResetCanShoot();
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Animation")
+	float ShootAnimationFlagDelay = 0.1f;
+	
+	FTimerHandle ShootAnimationTimerHandle;
 
+	void ResetIsShooting();
+
+	// 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Combat")
 	bool bCanShoot = true;
 
-	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Combat")
-	float ShootCooldown = 0.5f;
+	float ShootCooldown = 0.8f;
+
+	void ResetCanShoot();
+
+
 
 	FTimerHandle ShootCooldownTimerHandle;
 	
@@ -58,6 +70,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	AGun* CurrentGun() const;
+
+	UFUNCTION(BlueprintCallable)
+	void PickUpGun(AGun* GunToPickUp);
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Weapon")
+	TArray<AGun*> Guns;
+
 private:
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
@@ -82,19 +101,31 @@ private:
 	UPROPERTY()
 	AGun* Gun;
 
+	
+
+
 	UPROPERTY(EditDefaultsOnly)
 	TArray<TSubclassOf<AGun>> GunClasses;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-	TArray<AGun*> Guns;
+	
 	int ActiveGunIndex;
-
 
 
 	// Input component to handle gun functions
 	UInputComponent* PlayerInputComponent2;
-
 	void GunInputBindings();
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 	
