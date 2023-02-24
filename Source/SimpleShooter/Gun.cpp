@@ -67,12 +67,43 @@ void AGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// drop gun
+
+	if (bIsDropping)
+	{
+		FHitResult Hit;
+		FVector Start = GetActorLocation();
+		FVector End = Start + FVector(0, 0, -400);
+		FCollisionQueryParams Params;
+		Params.AddIgnoredActor(this);
+		Params.AddIgnoredActor(GetOwner());
+		bool bSuccess = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
+		// if the gun arrives at the hit location, stop dropping
+		if (GetActorLocation().Z <= Hit.Location.Z)
+		{
+			bIsDropping = false;
+		}
+
+		else if (bSuccess)
+		{
+			SetActorLocation(FMath::VInterpTo(Start, Hit.Location, DeltaTime, 5.f));
+
+		}
+		
+	}
+
 }
 
 USkeletalMeshComponent* AGun::GetMesh() const
 {
 	return Mesh;
 }
+
+void AGun::SetIsDropping(bool IsDropping)
+{
+	bIsDropping = IsDropping;
+}
+
 
 bool AGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 {
@@ -138,19 +169,18 @@ void AGun::Drop()
 {
 	// Detach the gun from shooter character and drop it to the ground
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-
-	SetActorLocation(GetActorLocation());
-	// Set the gun's collision to be able to be picked up by other characters
-	//Mesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	// Set the gun's gravity to be able to be picked up by other characters
-	Mesh->SetSimulatePhysics(true);
-
+	bIsDropping = true;	
 
 }
 
 void AGun::ResetCanReload()
 {
 	bCanReload = true;
+}
+
+void AGun::DropGunInterp()
+{
+		
 }
 
 

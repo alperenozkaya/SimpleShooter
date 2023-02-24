@@ -36,6 +36,8 @@ public:
 	// get mesh function to disable simulate physics in shooter character cpp
 	USkeletalMeshComponent* GetMesh() const;
 
+	void SetIsDropping(bool IsDropping);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
@@ -90,6 +92,12 @@ private:
 	float ReloadTime = 3.f;
 
 	FTimerHandle ReloadTimerHandle;
+
+	void DropGunInterp();
+	
+	bool bIsDropping = false;
+
+
 	
 
 };

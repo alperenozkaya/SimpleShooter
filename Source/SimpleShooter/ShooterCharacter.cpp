@@ -238,6 +238,7 @@ AGun* AShooterCharacter::CurrentGun() const
 void AShooterCharacter::PickUpGun(AGun* GunToPickUp)
 {
 	if (GunToPickUp == nullptr) return;
+	GunToPickUp->SetIsDropping(false);  // set isDropping to false to avoid dropping the gun when it's picked up
 	Guns.Add(GunToPickUp);
 	ActiveGunIndex = Guns.Num() - 1;
 	GunToPickUp->GetMesh()->SetSimulatePhysics(false);
