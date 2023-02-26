@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\lootablehealth.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\simpleshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealeditor\\development\\simpleshooter\\definitions.simpleshooter.h",
+            "e:\\unrealcourse\\simpleshooter\\source\\simpleshooter\\lootablehealth.h",
+            "e:\\unrealcourse\\simpleshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\simpleshooter\\lootablehealth.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

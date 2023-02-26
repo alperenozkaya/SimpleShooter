@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class ALootableHealth;
 class AGun;
 #ifdef SIMPLESHOOTER_ShooterCharacter_generated_h
 #error "ShooterCharacter.generated.h already included, missing '#pragma once' in ShooterCharacter.h"
@@ -17,6 +18,7 @@ class AGun;
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_SPARSE_DATA
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execPickUpHealth); \
 	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
 	DECLARE_FUNCTION(execGetHealthPercent); \
@@ -25,6 +27,7 @@ class AGun;
 
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execPickUpHealth); \
 	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
 	DECLARE_FUNCTION(execGetHealthPercent); \

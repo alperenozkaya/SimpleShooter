@@ -3,6 +3,7 @@
 
 #include "ShooterCharacter.h"
 #include "Gun.h"
+#include "LootableHealth.h"
 #include "Components/CapsuleComponent.h"
 #include "SimpleShooterGameModeBase.h"
 #include "InputCoreTypes.h"
@@ -257,6 +258,21 @@ void AShooterCharacter::PickUpGun(AGun* GunToPickUp)
 	Guns[ActiveGunIndex]->SetActorEnableCollision(true);
 
 
+}
+
+void AShooterCharacter::PickUpHealth(ALootableHealth* LootableHealth)
+{
+	if (LootableHealth == nullptr || Health == MaxHealth) return;
+	float NewHealth = Health + LootableHealth->GetHealthAmount();
+	if (NewHealth > MaxHealth)
+	{
+		Health = MaxHealth;
+	}
+	else
+	{
+		Health = NewHealth;
+	}
+	LootableHealth->Destroy();
 }
 
 void AShooterCharacter::ResetCanShoot()

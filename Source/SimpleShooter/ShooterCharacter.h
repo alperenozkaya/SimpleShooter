@@ -74,6 +74,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PickUpGun(AGun* GunToPickUp);
 
+	UFUNCTION(BlueprintCallable)
+	void PickUpHealth(ALootableHealth* LootableHealth);
+
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Weapon")
 	TArray<AGun*> Guns;
 
@@ -101,8 +104,8 @@ private:
 	UPROPERTY()
 	AGun* Gun;
 
-	
-
+	UPROPERTY()
+	ALootableHealth* LooatableHealth;
 
 	UPROPERTY(EditDefaultsOnly)
 	TArray<TSubclassOf<AGun>> GunClasses;
