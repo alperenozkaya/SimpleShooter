@@ -4,6 +4,7 @@
 #include "ShooterCharacter.h"
 #include "Gun.h"
 #include "LootableHealth.h"
+#include "LootableAmmo.h"
 #include "Components/CapsuleComponent.h"
 #include "SimpleShooterGameModeBase.h"
 #include "InputCoreTypes.h"
@@ -149,10 +150,6 @@ void AShooterCharacter::LookRightRate(float AxisValue)
 	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AShooterCharacter::ZoomInOut()
-{
-	
-}
 
 void AShooterCharacter::GunInputBindings()
 {
@@ -273,6 +270,22 @@ void AShooterCharacter::PickUpHealth(ALootableHealth* LootableHealth)
 		Health = NewHealth;
 	}
 	LootableHealth->Destroy();
+}
+
+void AShooterCharacter::PickUpAmmo(ALootableAmmo* LootableAmmo)
+{
+
+	if (LootableAmmo == nullptr || Guns[ActiveGunIndex]->TotalAmmo == Guns[ActiveGunIndex]->MaxAmmo || Guns[ActiveGunIndex]->GunAmmoType != LootableAmmo->AmmoType) return;
+	int NewAmmo = Guns[ActiveGunIndex]->TotalAmmo + LootableAmmo->GetAmmoAmount();
+	if (NewAmmo > Guns[ActiveGunIndex]->MaxAmmo)
+	{
+		Guns[ActiveGunIndex]->TotalAmmo = Guns[ActiveGunIndex]->MaxAmmo;
+	}
+	else
+	{
+		Guns[ActiveGunIndex]->TotalAmmo = NewAmmo;
+	}
+	LootableAmmo->Destroy();
 }
 
 void AShooterCharacter::ResetCanShoot()

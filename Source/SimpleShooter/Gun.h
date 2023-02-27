@@ -37,15 +37,23 @@ public:
 	USkeletalMeshComponent* GetMesh() const;
 
 	void SetIsDropping(bool IsDropping);
+	
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	FString GunAmmoType = "";
 
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	int MaxAmmo = 50;
+
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	int TotalAmmo;
+
+	
 private:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
-
-
 
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* MuzzleFlash;
@@ -69,14 +77,15 @@ private:
 
 	AController* GetOwnerController() const;
 
-	UPROPERTY(EditAnywhere, Category = "Weapon")
-	int TotalAmmo = 50;
 	
+	
+	UPROPERTY(EditAnywhere, Category = "Weapon")
+	int CurrentMagazineAmmo;
+
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	int MagazineAmmo = 30;
 
-	int CurrentMagazineAmmo;
-
+	
 	UFUNCTION(BlueprintPure)
 	FText GetAmmoInfo() const;
 

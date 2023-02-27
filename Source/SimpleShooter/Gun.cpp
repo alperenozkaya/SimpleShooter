@@ -58,6 +58,7 @@ void AGun::PullTrigger()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
+	TotalAmmo = MaxAmmo;
 	CurrentMagazineAmmo = MagazineAmmo;
 	
 }
@@ -132,7 +133,7 @@ AController* AGun::GetOwnerController() const
 
 FText AGun::GetAmmoInfo() const
 {
-	FText InfoText = FText::FromString(FString::Printf(TEXT("%i / %i"), CurrentMagazineAmmo, TotalAmmo));
+	FText InfoText = FText::FromString(FString::Printf(TEXT("%i / %i"), CurrentMagazineAmmo, TotalAmmo - CurrentMagazineAmmo));
 	return InfoText;
 }
 

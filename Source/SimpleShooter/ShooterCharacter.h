@@ -31,7 +31,7 @@ public:
 	bool IsDead() const;
 	
 	
-	// to add shooting animation
+	// Shoot Functions
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Animation")
 	bool bIsShooting;
 
@@ -42,7 +42,6 @@ public:
 
 	void ResetIsShooting();
 
-	// 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Combat")
 	bool bCanShoot = true;
 
@@ -51,11 +50,8 @@ public:
 
 	void ResetCanShoot();
 
-
-
 	FTimerHandle ShootCooldownTimerHandle;
 	
-
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const;
 	
@@ -70,12 +66,15 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	AGun* CurrentGun() const;
-
+	// Loot Functions
 	UFUNCTION(BlueprintCallable)
 	void PickUpGun(AGun* GunToPickUp);
 
 	UFUNCTION(BlueprintCallable)
 	void PickUpHealth(ALootableHealth* LootableHealth);
+
+	UFUNCTION(BlueprintCallable)
+	void PickUpAmmo(ALootableAmmo* LootableAmmo);
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Weapon")
 	TArray<AGun*> Guns;
@@ -117,6 +116,8 @@ private:
 	// Input component to handle gun functions
 	UInputComponent* PlayerInputComponent2;
 	void GunInputBindings();
+
+	
 
 
 

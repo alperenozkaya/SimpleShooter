@@ -78,6 +78,18 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GunAmmoType_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_GunAmmoType;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxAmmo_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_MaxAmmo;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TotalAmmo_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_TotalAmmo;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Root_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Root;
@@ -110,9 +122,9 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_TotalAmmo_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentMagazineAmmo_MetaData[];
 #endif
-		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_TotalAmmo;
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_CurrentMagazineAmmo;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MagazineAmmo_MetaData[];
 #endif
@@ -147,6 +159,27 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		{ "ModuleRelativePath", "Gun.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_GunAmmoType_MetaData[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Gun.h" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_GunAmmoType = { "GunAmmoType", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, GunAmmoType), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_GunAmmoType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_GunAmmoType_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_MaxAmmo_MetaData[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Gun.h" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_MaxAmmo = { "MaxAmmo", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, MaxAmmo), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_MaxAmmo_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_MaxAmmo_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Gun.h" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo = { "TotalAmmo", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, TotalAmmo), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_Root_MetaData[] = {
 		{ "Category", "Gun" },
@@ -206,12 +239,12 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, Damage), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_Damage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_Damage_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_CurrentMagazineAmmo_MetaData[] = {
 		{ "Category", "Weapon" },
 		{ "ModuleRelativePath", "Gun.h" },
 	};
 #endif
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo = { "TotalAmmo", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, TotalAmmo), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo_MetaData)) };
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_CurrentMagazineAmmo = { "CurrentMagazineAmmo", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, CurrentMagazineAmmo), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_CurrentMagazineAmmo_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_CurrentMagazineAmmo_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AGun_Statics::NewProp_MagazineAmmo_MetaData[] = {
 		{ "Category", "Weapon" },
@@ -245,6 +278,9 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AGun_Statics::NewProp_ReloadTime = { "ReloadTime", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AGun, ReloadTime), METADATA_PARAMS(Z_Construct_UClass_AGun_Statics::NewProp_ReloadTime_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AGun_Statics::NewProp_ReloadTime_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AGun_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_GunAmmoType,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_MaxAmmo,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_Root,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_Mesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_MuzzleFlash,
@@ -253,7 +289,7 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_ImpactEffect,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_MaxRange,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_Damage,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_TotalAmmo,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_CurrentMagazineAmmo,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_MagazineAmmo,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_ReloadSound,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AGun_Statics::NewProp_bCanReload,
@@ -295,9 +331,9 @@ void EmptyLinkFunctionForGeneratedCodeGun() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SimpleShooter_Source_SimpleShooter_Gun_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AGun, AGun::StaticClass, TEXT("AGun"), &Z_Registration_Info_UClass_AGun, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AGun), 1630125082U) },
+		{ Z_Construct_UClass_AGun, AGun::StaticClass, TEXT("AGun"), &Z_Registration_Info_UClass_AGun, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AGun), 1854188525U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SimpleShooter_Source_SimpleShooter_Gun_h_3523700498(TEXT("/Script/SimpleShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_SimpleShooter_Source_SimpleShooter_Gun_h_1517258624(TEXT("/Script/SimpleShooter"),
 		Z_CompiledInDeferFile_FID_SimpleShooter_Source_SimpleShooter_Gun_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_SimpleShooter_Source_SimpleShooter_Gun_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class ALootableAmmo;
 class ALootableHealth;
 class AGun;
 #ifdef SIMPLESHOOTER_ShooterCharacter_generated_h
@@ -18,6 +19,7 @@ class AGun;
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_SPARSE_DATA
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execPickUpAmmo); \
 	DECLARE_FUNCTION(execPickUpHealth); \
 	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
@@ -27,6 +29,7 @@ class AGun;
 
 #define FID_SimpleShooter_Source_SimpleShooter_ShooterCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execPickUpAmmo); \
 	DECLARE_FUNCTION(execPickUpHealth); \
 	DECLARE_FUNCTION(execPickUpGun); \
 	DECLARE_FUNCTION(execCurrentGun); \
