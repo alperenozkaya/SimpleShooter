@@ -211,7 +211,7 @@ void AShooterCharacter::Shoot()
 		
 		
 		// play shoot animation additively
-		// TODO: implement it as blueprintfunction	
+		// TODO: implement it as blueprint function	
 
 		GetWorld()->GetTimerManager().SetTimer(ShootCooldownTimerHandle, this, &AShooterCharacter::ResetCanShoot, ShootCooldown, false);	
 	}

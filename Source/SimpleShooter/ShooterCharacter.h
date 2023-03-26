@@ -36,7 +36,7 @@ public:
 	bool bIsShooting;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Animation")
-	float ShootAnimationFlagDelay = 0.1f;
+	float ShootAnimationFlagDelay = 0.3f; // arbitrary value ( lower than shoot cooldown)
 	
 	FTimerHandle ShootAnimationTimerHandle;
 
